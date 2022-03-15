@@ -8,12 +8,13 @@ fn main() -> Result<()> {
 	ug.send(&Message::SetMode(Mode::Video))?;
 
 	let mut colors = vec![Color::rgb(0, 0, 0,); 48];
-	for i in 0..24 {
-		colors[i] = Color::rgb(0xff, 0xff, 0x00);
+
+	let count = 10;
+	for i in 0..count {
+		let h = i as f32 / count as f32;
+		colors[i] = Color::hsl(h, 1.0, 0.5);
 	}
-	for i in 24..48 {
-		colors[i] = Color::rgb(0x00, 0x77, 0xff);
-	}
+
 	let mut msg = Message::SetVideoLEDs(colors);
 	loop {
 		match &mut msg {
